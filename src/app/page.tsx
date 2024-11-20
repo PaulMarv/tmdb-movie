@@ -3,13 +3,14 @@ import Results from '@/components/Results';
 import React from 'react';
 
 type HomeProps = {
-  searchParams: {
+  searchParams: Promise<{
     genre?: string;
-  };
+  }>;
 };
 
-export default async function Home({ searchParams }: Readonly<HomeProps>) {
-  const genre = searchParams.genre ?? 'popular';
+export default async function Home({ searchParams }: HomeProps) {
+  const resolvedSearchParams = await searchParams;
+  const genre = resolvedSearchParams.genre ?? 'popular';
 
   const movieList = await getMovies({ genre });
   const results = movieList.results;
