@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TMDB Movie Application
+
+This is a movie application built using **Next.js**, **React**, and the **TMDB API**. The app allows users to browse popular movies, add them to their favorites, and view them later on a favorites page. It utilizes **localStorage** to store the list of favorite movies.
+
+## Features
+- Browse popular movies
+- View movie details
+- Add and remove movies from favorites
+- View favorite movies in a dedicated page
+
+## Prerequisites
+
+Ensure you have the following installed on your machine:
+
+- **Node.js**: [Download Node.js](https://nodejs.org/) (Preferably the LTS version)
+- **npm**: Comes with Node.js (or Yarn if you prefer)
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps to set up and run the project locally.
+
+### 1. Clone the Repository
+
+Clone the repository to your local machine using the following command:
 
 ```bash
+git clone https://github.com/PaulMarv/tmdb-movie.git
+```
+### 2. Install Dependencies
+Navigate into your project directory and install the required dependencies:
+```bash
+cd tmdb-movie
+npm install
+```
+Alternatively, if you're using Yarn:
+```bash
+yarn install
+```
+### 3. Set Up the Environment Variables
+To use the TMDB API, you need an API key.
+
+Create a .env.local file in the root of your project and add the following environment variable:
+```makefile
+NEXT_PUBLIC_TMDB_API_KEY=your_tmdb_api_key_here
+```
+### 4. Run the Application Locally
+After installing the dependencies and setting up the environment variables, you can start the development server:
+```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+### 5. File Structure
+Here is a basic overview of the project file structure:
+```/tmdb-movie
+│
+├── /components              # Reusable components like MovieCard, Results
+├── /pages                  # Page components for routing, like Home, Favorites
+├── /public                 # Static files such as images
+├── /styles                 # Global styles 
+├── /constants              # Data types, constants, etc.
+├── /api                    # API calls to fetch movie data
+├── /hooks                  # Custom hooks for logic
+├── .env.local              # Environment variables (e.g., TMDB API Key)
+├── next.config.js          # Next.js configuration
+├── package.json            # Dependencies and scripts
+└── README.md               # This file
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Design Decisions and Trade-offs
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Caching Data in Local Storage
+Reason: To persist favorite movies across sessions without additional API calls.
+### Asynchronous Data Fetching
+Reason: Cleaner code and better handling of asynchronous operations.
+### Component Structure
+Reason: Optimized for modern browsers, offering enhanced performance but may limit support for older browsers.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
