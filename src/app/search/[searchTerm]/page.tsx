@@ -2,13 +2,14 @@ import { getSearchResults } from '@/api/queries';
 import Results from '@/components/Results';
 
 type SearchPageProps = {
-    params: {
+    params: Promise<{
         searchTerm: string;
-    };
+    }>;
 };
 
 export default async function SearchPage({ params }: Readonly<SearchPageProps>) {
-    const movieList = await getSearchResults({ params });
+    const {searchTerm} = await params;
+    const movieList = await getSearchResults({ searchTerm });
     const results = movieList.results;
 
     return (

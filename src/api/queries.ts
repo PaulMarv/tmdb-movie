@@ -9,9 +9,7 @@ type GetMovieParams = {
     movieId: string;
 };
 type GetSearchResultsParams = {
-    params: {
-        searchTerm: string;
-    };
+    searchTerm: string;
     page?: number;
 };
 
@@ -55,9 +53,9 @@ export async function getGenres(): Promise<GenresResponse> {
 
 
 export async function getSearchResults({
-    params,
+    searchTerm,
 }: GetSearchResultsParams): Promise<MovieData> {
-    const searchTerm = params.searchTerm;
+
 
     const res = await fetch(
         `${BASE_URL}/3/search/movie?api_key=${API_KEY}&query=${searchTerm}&language=en-US&include_adult=false`
