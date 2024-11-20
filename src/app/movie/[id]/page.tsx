@@ -4,25 +4,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 type MoviePageProps = {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 };
 
-export default async function MoviePage({ params }: Readonly<MoviePageProps>) {
-
-
-    const movie: SingleMovieData = await getMovie({ movieId: params.id })
+export default async function MoviePage({ params }: MoviePageProps) {
+    const { id } = await params; 
+    const movie: SingleMovieData = await getMovie({ movieId: id });
     const genreNames = movie.genres.map((genre) => genre.name);
-    console.log('your single movie', movie)
-
+    
     return (
         <div className="w-full">
             <div className="p-4 md:pt-8 flex flex-col md:flex-row content-center max-w-6xl mx-auto md:space-x-6">
                 <Link href={movie.homepage ?? '#'}>
                     <Image
-                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path ?? movie.backdrop_path
-                            }`}
+                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path ?? movie.backdrop_path}`}
                         alt={movie.title || movie.original_title || 'Movie Poster'}
                         width={500}
                         height={300}
